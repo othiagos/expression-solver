@@ -3,7 +3,7 @@
 template<typename T>
 class IStack {
 public:
-    bool is_empty() = 0;
+    virtual bool is_empty() = 0;
     virtual void push(T item) = 0;
     virtual T pop() = 0;
     virtual void clear() = 0;
