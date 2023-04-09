@@ -1,6 +1,5 @@
 NAME = expression_solver
 CC = g++
-LIBS =
 SRC_DIR = ./src
 INC_DIR = ./include
 BIN_DIR = ./bin
@@ -9,6 +8,7 @@ CFLAGS = -Wall -g
 EXE = $(BIN_DIR)/$(NAME)
 
 OBJS = \
+	$(OBJ_DIR)/Parser.o \
 	$(OBJ_DIR)/expression_solver.o
 
 all: mkdir $(EXE)
@@ -21,9 +21,9 @@ mkdir:
 	mkdir -p $(OBJ_DIR)
 
 $(EXE): $(OBJS)
-	$(CC) $(OBJS) -o $(EXE) $(LIBS)
+	$(CC) $(OBJS) -o $(EXE)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/**/%.cpp $(INC_DIR)/%.hpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.hpp
 	$(CC) -c $(CFLAGS) $< -I $(INC_DIR) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
