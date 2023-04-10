@@ -30,3 +30,13 @@ TEST_CASE("Check clear") {
 
     CHECK(stack.is_empty());
 }
+
+TEST_CASE("Check top") {
+    ArrayStack<int> stack;
+
+    stack.push(15);
+    stack.push(25);
+
+    bool exp = stack.top() == 25 && stack.get_size() == 2;
+    CHECK(exp);
+}

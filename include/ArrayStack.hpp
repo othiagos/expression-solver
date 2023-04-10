@@ -41,6 +41,13 @@ public:
         return itens[size];
     }
 
+    T top() override {
+        if (get_size() == 0)
+            throw "Stack is empty!";
+        
+        return itens[size - 1];
+    }
+
     void clear() override {
         size = 0;
     }
