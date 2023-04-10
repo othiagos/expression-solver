@@ -29,14 +29,16 @@ public:
         if (get_size() == MAX_TAM)
             throw "Stack is full!";
 
-        itens[size++] = item;
+        itens[size] = item;
+        size++;
     }
 
     T pop() override {
         if (get_size() == 0)
             throw "Stack is empty!";
 
-        return itens[size--];
+        size--;
+        return itens[size];
     }
 
     void clear() override {
