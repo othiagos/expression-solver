@@ -8,8 +8,7 @@ BIN_DIR = ./bin
 OBJ_DIR = ./obj
 CFLAGS = -Wall -g
 TEST_DIR = ./test
-TEST_BIN_DIR = ./test/bin
-TEST_SRC_DIR = ./test/src
+TEST_SRC_DIR = $(TEST_DIR)/src
 EXE = $(BIN_DIR)/$(NAME)
 EXE_TEST = $(BIN_DIR)/$(TEST_NAME)
 
@@ -17,7 +16,8 @@ OBJS = \
 	$(OBJ_DIR)/Parser.o
 
 TEST_OBJS = \
-	$(OBJ_DIR)/TestArrayStack.o
+	$(OBJ_DIR)/TestArrayStack.o \
+	$(OBJ_DIR)/TestArrayQueue.o
 
 all: mkdir $(EXE)
 
