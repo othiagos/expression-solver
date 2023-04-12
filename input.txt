@@ -1,4 +1,5 @@
-LER 5 + 3 x 4
+LER  5 + ((1 + 2) x 4) - 3
+LER  5,2 1 2 + 4,7 x + 3 -
 INFIXA
 POSFIXA
 RESOLVE
