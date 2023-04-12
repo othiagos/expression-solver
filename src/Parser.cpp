@@ -95,13 +95,15 @@ bool Parser::is_valid_expresion(std::string expresion) {
 bool Parser::is_postfix(std::string postfix) {
     ArrayStack<double> stack;
 
-    if (!is_operator(*(postfix.end() - 1))) {
+    if (!is_operator(*(postfix.end() - 1)))
         return false;
-    }
 
     for (int i = 0; i < (int) postfix.length(); i++) {
         if (is_empty_space(postfix[i]))
             continue;
+
+        if (is_separator(postfix[i]))
+            return false;
 
         for (int j = 0; is_number(postfix[i + j]); j++) {
             if (!is_number(postfix[i + j + 1])) {
@@ -130,7 +132,20 @@ bool Parser::is_postfix(std::string postfix) {
 }
 
 bool Parser::is_infix(std::string infix) {
-    return false;
+    if (is_operator(*(infix.end() - 1)))
+        return false;
+
+    for (int i = 0; i < (int) infix.length(); i++) {
+        if (is_number(infix[i]) && is_empty_space(infix[i + 1]) && is_number(infix[i + 2]))
+            return false;
+        
+        if (is_operator(infix[i]) && is_operator(infix[i + 1]))
+            return false;
+        
+        if (is_operator(infix[i] && is_empty_space(infix[i + 1]) && is_operator(infix[i + 2])))
+            return false;
+    }
+    return true;
 }
 
 std::string Parser::infix_to_postfix(std::string expresion) {
