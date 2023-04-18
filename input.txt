@@ -1,11 +1,4 @@
-LER     2+3 5 x
-LER  2+3xx5
-LER   2+3x x5
-LER          2 + 3 x 5
-LER   2+3x 5
-LER      5 + ((1 + 2) x 4) - 3
-LER 5,2 1 2 + 4.7 x + 3 -
-LER 5,2 1 2 + 4,7 x + 3 -
+LER ((2 + 5)x 2) + 2
 INFIXA
 POSFIXA
 RESOLVE
