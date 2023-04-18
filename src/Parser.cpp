@@ -148,37 +148,16 @@ bool Parser::is_infix(std::string infix) {
     return true;
 }
 
-std::string Parser::infix_to_postfix(std::string expresion) {
-    std::string postfix = ";)";
-    
-    return postfix;
-}
-
-void Parser::read(std::string input) {
+TYPE_EXPR Parser::expression(std::string &input) {
     remove_left_white_space(input);
-    
+
     if (!is_valid_expresion(input))
-        std::cout <<  "ERRO: " + input + " NAO VALIDA" << std::endl;
-
+        return TYPE_EXPR::INVALID_EXPRESION;
     else if (is_postfix(input)) {
-        std::cout <<  "EXPRESSAO OK: " + input << std::endl;
+        return TYPE_EXPR::POSTFIX;
     }
-
-    else if (is_infix(input)) {
-        std::cout <<  "EXPRESSAO OK: " + input << std::endl;
+    else if (is_infix(input))  {
+        return TYPE_EXPR::INFIX;
     }
-    else
-        std::cout <<  "ERRO: " + input + " NAO VALIDA" << std::endl;
-}
-
-void Parser::infix() {
-
-}
-
-void Parser::postfix() {
-
-}
-
-void Parser::solve() {
-
+    return TYPE_EXPR::INVALID_EXPRESION;
 }

@@ -6,6 +6,12 @@
 
 #include "ArrayStack.hpp"
 
+enum TYPE_EXPR {
+    INVALID_EXPRESION,
+    INFIX,
+    POSTFIX
+};
+
 class Parser {
 private:
     void remove_left_white_space(std::string &text);
@@ -18,14 +24,10 @@ private:
     bool is_infix(std::string postfix);
     void replace_char(std::string &str, std::string ex, std::string by);
     double calc_operator(char alpha, double number1, double number2);
-    std::string infix_to_postfix(std::string expresion);
 
 public:
     Parser();
     ~Parser();
 
-    void read(std::string input);
-    void infix();
-    void postfix();
-    void solve();
+    TYPE_EXPR expression(std::string &input);
 };

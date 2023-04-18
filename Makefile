@@ -1,5 +1,5 @@
 NAME = expression_solver
-TEST_NAME = test
+TEST_NAME = expression_solver_test
 CC = g++
 SRC_DIR = ./src
 INC_DIR = ./include
@@ -13,11 +13,13 @@ EXE = $(BIN_DIR)/$(NAME)
 EXE_TEST = $(BIN_DIR)/$(TEST_NAME)
 
 OBJS = \
+	$(OBJ_DIR)/Expression.o \
 	$(OBJ_DIR)/Parser.o
 
 TEST_OBJS = \
 	$(OBJ_DIR)/TestArrayStack.o \
-	$(OBJ_DIR)/TestArrayQueue.o
+	$(OBJ_DIR)/TestArrayQueue.o \
+	$(OBJ_DIR)/TestParser.o 
 
 all: mkdir $(EXE)
 
