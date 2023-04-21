@@ -1,4 +1,4 @@
-LER ((2 + 5)x 2) + 2
+LER ((2 + 5) x 2) + 2
 INFIXA
 POSFIXA
 RESOLVE

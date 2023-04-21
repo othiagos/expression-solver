@@ -22,21 +22,21 @@ int main(int argc, char const *argv[]) {
                 break;
             
             case TYPE_EXPR::INFIX: 
-                expr.infix(input);
+                expr.insert(input);
                 std::cout << "EXPRESSAO OK: " + input << std::endl;
                 break;
 
             case TYPE_EXPR::POSTFIX:
-                expr.postfix(input);
+                expr.insert(input);
                 std::cout << "EXPRESSAO OK: " + input << std::endl;
                 break;
             }
         }
         else if (input == "INFIXA") {
-            expr.to_infix();
+            std::cout << "INFIXA: "<< expr.to_infix() << std::endl;
         }
         else if (input == "POSFIXA") {
-            expr.to_postfix();
+            std::cout << "POSFIXA: "<< expr.to_postfix() << std::endl;;
         }
         else if (input == "RESOLVE") {
             expr.solve();

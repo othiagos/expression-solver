@@ -2,17 +2,20 @@
 
 #include <string>
 
+#include "ExpressionTree.hpp"
+#include "Util.hpp"
+
 class Expression {
 private:
+    ExpressionTree _tree;
 
-    std::string infix_to_postfix(std::string);
+    ExpressionTree &get_tree();
 
 public:
     Expression();
     ~Expression();
 
-    void infix(std::string exp);
-    void postfix(std::string exp);
+    void insert(std::string exp);
     std::string to_infix();
     std::string to_postfix();
     double solve();

@@ -14,6 +14,7 @@ EXE_TEST = $(BIN_DIR)/$(TEST_NAME)
 
 OBJS = \
 	$(OBJ_DIR)/Expression.o \
+	$(OBJ_DIR)/Util.o \
 	$(OBJ_DIR)/Parser.o
 
 TEST_OBJS = \
