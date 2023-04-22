@@ -1,7 +1,10 @@
 #include <iostream>
+#include <string>
+#include <iomanip>
+#include <sstream>
 
 #include "Parser.hpp"
-#include "Expression.hpp"
+#include "ExpressionTree.hpp"
 
 using std::string;
 using std::cin;
@@ -9,7 +12,7 @@ using std::cin;
 int main(int argc, char const *argv[]) {
     string input;
     Parser parser;
-    Expression expr;
+    ExpressionTree tree;
 
     while (cin >> input) {
         if (input == "LER") {
@@ -22,24 +25,29 @@ int main(int argc, char const *argv[]) {
                 break;
             
             case TYPE_EXPR::INFIX: 
-                expr.insert(input);
+                tree.insert_infix(input);
                 std::cout << "EXPRESSAO OK: " + input << std::endl;
                 break;
 
             case TYPE_EXPR::POSTFIX:
-                expr.insert(input);
+                tree.insert_postfix(input);
                 std::cout << "EXPRESSAO OK: " + input << std::endl;
                 break;
             }
         }
         else if (input == "INFIXA") {
-            std::cout << "INFIXA: "<< expr.to_infix() << std::endl;
+            std::cout << "INFIXA: "<< tree.in_order() << std::endl;
         }
         else if (input == "POSFIXA") {
-            std::cout << "POSFIXA: "<< expr.to_postfix() << std::endl;;
+            std::cout << "POSFIXA: "<< tree.post_order() << std::endl;;
         }
         else if (input == "RESOLVE") {
-            expr.solve();
+            std::stringstream stream;
+            stream << std::fixed << std::setprecision(6) << tree.solve();
+
+            std::string str = stream.str();
+            util::replace_char(str, ".", ",");
+            std::cout << "VAL: " << str << std::endl;
         }
     }
     return 0;

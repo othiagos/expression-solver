@@ -5,15 +5,25 @@ Parser::Parser() { }
 Parser::~Parser() { }
 
 bool Parser::is_valid_expresion(std::string expresion) {
-    int n_quant = 0, o_quant = 0;
+    int n_quant = 0, o_quant = 0, o_bracket = 0, c_bracket = 0;
 
     for (int i = 0; i < (int) expresion.length(); i++) {
-        if (util::is_empty_space(expresion[i]) || util::is_separator(expresion[i])) {
+        if (util::is_empty_space(expresion[i])) {
             continue;
         }
 
         if (util::is_operator(expresion[i])) {
             o_quant++;
+            continue;
+        }
+
+        if (expresion[i] == '(') {
+            o_bracket++;
+            continue;
+        }
+
+        if (expresion[i] == ')') {
+            c_bracket++;
             continue;
         }
 
@@ -30,7 +40,7 @@ bool Parser::is_valid_expresion(std::string expresion) {
             return false;
 
     }
-    return n_quant == o_quant + 1;
+    return n_quant == o_quant + 1 && o_bracket == c_bracket;
 }
 
 bool Parser::is_postfix(std::string postfix) {
@@ -90,7 +100,7 @@ bool Parser::is_infix(std::string infix) {
 }
 
 TYPE_EXPR Parser::expression(std::string &input) {
-    util::remove_left_white_space(input);
+    util::rm_border_space(input);
 
     if (!is_valid_expresion(input))
         return TYPE_EXPR::INVALID_EXPRESION;
