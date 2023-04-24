@@ -6,7 +6,6 @@ Node::Node() {
     item = "";
 }
 
-
 Node *ExpressionTree::get_root() {
     return this->_root;
 }
@@ -99,7 +98,7 @@ std::string ExpressionTree::break_expression(std::string exp, std::string &lstr,
         }
 
         if (close_bracket == 0) {
-            if ((exp[i] == '+' || exp[i] == '-')) {
+            if (exp[i] == '+' || exp[i] == '-') {
                 lstr = exp.substr(0, i);
                 rstr = exp.substr(i + 1, exp.length() - i + 1);
 
@@ -107,7 +106,7 @@ std::string ExpressionTree::break_expression(std::string exp, std::string &lstr,
                 util::rm_border_space(rstr);
                 return std::string(1, exp[i]);
             }
-            if ((exp[i] == 'x' || exp[i] == '/')) {
+            if (exp[i] == 'x' || exp[i] == '/') {
                 lstr = exp.substr(0, i);
                 rstr = exp.substr(i + 1, exp.length() - i + 1);
 
