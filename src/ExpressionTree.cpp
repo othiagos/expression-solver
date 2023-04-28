@@ -106,7 +106,7 @@ std::string ExpressionTree::break_expression(std::string exp, std::string &lstr,
                 util::rm_border_space(rstr);
                 return std::string(1, exp[i]);
             }
-            if (exp[i] == 'x' || exp[i] == '/') {
+            if (exp[i] == '*' || exp[i] == '/') {
                 lstr = exp.substr(0, i);
                 rstr = exp.substr(i + 1, exp.length() - i + 1);
 
@@ -168,7 +168,8 @@ ExpressionTree::~ExpressionTree() {
 }
 
 void ExpressionTree::insert_infix(std::string exp) {
-    Node*node = new Node();
+    Parser::is_infix(exp);
+    Node *node = new Node();
     node->item = exp;
     set_root(node);
     insert_recursive_infix(get_root());
@@ -176,6 +177,7 @@ void ExpressionTree::insert_infix(std::string exp) {
 }
 
 void ExpressionTree::insert_postfix(std::string exp) {
+    Parser::is_postfix(exp);
     ArrayStack<Node*> stack;
 
     for (int i = 0; i < (int) exp.length(); i++) {

@@ -4,6 +4,7 @@
 
 #include "ArrayQueue.hpp"
 #include "ArrayStack.hpp"
+#include "Parser.hpp"
 #include "Util.hpp"
 
 class Node {
