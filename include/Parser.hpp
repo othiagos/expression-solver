@@ -4,24 +4,17 @@
 #include <string>
 #include <string>
 
+#include "ParserExcp.hpp"
 #include "ArrayStack.hpp"
 #include "Util.hpp"
 
-enum TYPE_EXPR {
-    INVALID_EXPRESION,
-    INFIX,
-    POSTFIX
-};
+#define MIN_NUMBER 2
 
 class Parser {
 private:
-    bool is_valid_expresion(std::string expresion);
-    bool is_postfix(std::string postfix);
-    bool is_infix(std::string postfix);
+    static void is_valid(std::string exp);
 
 public:
-    Parser();
-    ~Parser();
-
-    TYPE_EXPR expression(std::string &input);
+    static void is_infix(std::string exp);
+    static void is_postfix(std::string exp);
 };

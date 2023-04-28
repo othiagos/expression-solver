@@ -1,114 +1,77 @@
 #include "Parser.hpp"
 
-Parser::Parser() { }
+void Parser::is_valid(std::string exp) {
+    int n_quant = 0, o_quant = 0;
 
-Parser::~Parser() { }
-
-bool Parser::is_valid_expresion(std::string expresion) {
-    int n_quant = 0, o_quant = 0, o_bracket = 0, c_bracket = 0;
-
-    for (int i = 0; i < (int) expresion.length(); i++) {
-        if (util::is_empty_space(expresion[i])) {
+    for (int i = 0; i < (int) exp.length(); i++) {
+        if (util::is_empty_space(exp[i])) {
             continue;
         }
 
-        if (util::is_operator(expresion[i])) {
+        if (util::is_operator(exp[i])) {
             o_quant++;
             continue;
         }
 
-        if (expresion[i] == '(') {
-            o_bracket++;
-            continue;
-        }
-
-        if (expresion[i] == ')') {
-            c_bracket++;
-            continue;
-        }
-
-        for (int j = 0; util::is_number(expresion[i + j]); j++) {
-            if (!util::is_number(expresion[i + j + 1])) {
+        for (int j = 0; util::is_number(exp[i + j]); j++) {
+            if (!util::is_number(exp[i + j + 1])) {
                 n_quant++;
                 i += j;
                 break;
             }
         }
         
-        char c = expresion[i];
-        if(!(util::is_empty_space(c) || util::is_separator(c) || util::is_operator(c) || util::is_number(c)))
-            return false;
+        char c = exp[i];
+        if(!(util::is_empty_space(c) || util::is_bracket(c) || util::is_operator(c) || util::is_number(c)))
+            throw pexcp::InvalidExpresion(exp);
 
     }
-    return n_quant == o_quant + 1 && o_bracket == c_bracket;
+
+    if (n_quant != o_quant + 1)
+        throw pexcp::InvalidExpresion(exp);
 }
 
-bool Parser::is_postfix(std::string postfix) {
-    ArrayStack<double> stack;
+void Parser::is_postfix(std::string exp) {
+    Parser::is_valid(exp);
+    
+    if (!util::is_operator(*(exp.end() - 1)))
+        throw pexcp::InvalidPostfix(exp);
 
-    if (!util::is_operator(*(postfix.end() - 1)))
-        return false;
-
-    for (int i = 0; i < (int) postfix.length(); i++) {
-        if (util::is_empty_space(postfix[i]))
+    int find_number = 0;
+    for (int i = 0; i < (int) exp.length(); i++) {
+        if (util::is_empty_space(exp[i]))
             continue;
 
-        if (util::is_separator(postfix[i]))
-            return false;
-
-        for (int j = 0; util::is_number(postfix[i + j]); j++) {
-            if (!util::is_number(postfix[i + j + 1])) {
-                std::string n = postfix.substr(i, j + 1);
-                util::replace_char(n, ",", ".");
-                stack.push(std::stod(n));
+        if (util::is_operator(exp[i]) || util::is_bracket(exp[i]))
+            throw pexcp::InvalidPostfix(exp);
+        
+        for (int j = 0; util::is_number(exp[i + j]); j++) {
+            if (!util::is_number(exp[i + j + 1])) {
+                find_number++;
                 i += j;
                 break;
             }
         }
 
-        if (util::is_operator(postfix[i])) {
-            try {
-                double n1, n2, res;
-                n1 = stack.pop();
-                n2 = stack.pop();
-                res = util::calc_operator(postfix[i], n2, n1);
-                stack.push(res);
-            }
-            catch(...) {
-                return false;
-            }
-        }
+        if (find_number == MIN_NUMBER)
+            break;
     }
-    return stack.get_size() == 1;
 }
 
-bool Parser::is_infix(std::string infix) {
-    if (util::is_operator(*(infix.end() - 1)))
-        return false;
+void Parser::is_infix(std::string exp) {
+    Parser::is_valid(exp);
 
-    for (int i = 0; i < (int) infix.length(); i++) {
-        if (util::is_number(infix[i]) && util::is_empty_space(infix[i + 1]) && util::is_number(infix[i + 2]))
-            return false;
+    if (util::is_operator(*(exp.end() - 1)))
+        throw pexcp::InvalidInfix(exp);
+
+    for (int i = 0; i < (int) exp.length(); i++) {
+        if (util::is_number(exp[i]) && util::is_empty_space(exp[i + 1]) && util::is_number(exp[i + 2]))
+            throw pexcp::InvalidInfix(exp);
         
-        if (util::is_operator(infix[i]) && util::is_operator(infix[i + 1]))
-            return false;
+        if (util::is_operator(exp[i]) && util::is_operator(exp[i + 1]))
+            throw pexcp::InvalidInfix(exp);
         
-        if (util::is_operator(infix[i] && util::is_empty_space(infix[i + 1]) && util::is_operator(infix[i + 2])))
-            return false;
+        if (util::is_operator(exp[i] && util::is_empty_space(exp[i + 1]) && util::is_operator(exp[i + 2])))
+            throw pexcp::InvalidInfix(exp);
     }
-    return true;
-}
-
-TYPE_EXPR Parser::expression(std::string &input) {
-    util::rm_border_space(input);
-
-    if (!is_valid_expresion(input))
-        return TYPE_EXPR::INVALID_EXPRESION;
-    else if (is_postfix(input)) {
-        return TYPE_EXPR::POSTFIX;
-    }
-    else if (is_infix(input))  {
-        return TYPE_EXPR::INFIX;
-    }
-    return TYPE_EXPR::INVALID_EXPRESION;
 }
