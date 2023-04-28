@@ -8,7 +8,7 @@ namespace util {
     void rm_border_space(std::string &text);
     void rm_bracket_border(std::string &text);
     bool is_empty_space(char alpha);
-    bool is_separator(char alpha);
+    bool is_bracket(char alpha);
     bool round_bracket(char alpha);
     bool is_operator(char alpha);
     bool is_number(char alpha);

@@ -20,9 +20,9 @@ void util::rm_bracket_border(std::string &text) {
 
     for (int i = 0; i < (int) text.length(); i++) {
         if (text[i] == '(') {
-            bracket_stage++;
             if (bracket_stage == 0)
                 start = i;
+            bracket_stage++;
         }
 
         if (text[i] == ')') {
@@ -39,7 +39,7 @@ bool util::is_empty_space(char alpha) {
     return alpha == ' ' || alpha == '\t';
 }
 
-bool util::is_separator(char alpha) {
+bool util::is_bracket(char alpha) {
     return alpha == '(' || alpha == ')';
 }
 
@@ -55,7 +55,7 @@ bool util::is_operator(char alpha) {
     if(alpha == '+' || alpha =='-')
         return true;
  
-    if(alpha == 'x' || alpha =='/')
+    if(alpha == '*' || alpha =='/')
         return true;
 
     return false;
@@ -80,7 +80,7 @@ double util::calc_operator(char alpha, double n1, double n2) {
         return n1 - n2;
         break;
 
-    case 'x':
+    case '*':
         return n1 * n2;
         break;
 
