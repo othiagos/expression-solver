@@ -23,6 +23,10 @@ int main(int argc, char const *argv[]) {
                     tree.insert_infix(input);
                 else if (t_exp == "POSFIXA")
                     tree.insert_postfix(input);
+
+                //remove left space from input
+                while (util::is_empty_space(*input.begin()))
+                    input.erase(input.begin());
                 
                 std::cout << "EXPRESSAO OK: " + input << std::endl;
             }
@@ -43,12 +47,27 @@ int main(int argc, char const *argv[]) {
                 util::replace_char(str, ".", ",");
                 std::cout << "VAL: " << str << std::endl;
             }
+            else if (input == "SAIR")
+                break;
+            
         }
-        catch (const pexcp::InvalidInfix &e) {
-            std::cout << "ERRO: " + input + " NAO VALIDA" << std::endl;
+        catch (etexcp::DomainError &e) {
+            std::cerr << "ERRO: EXP NAO EXISTE" << std::endl;
+        }
+        catch (etexcp::EmptyTree &e) {
+            std::cerr << "ERRO: EXP NAO EXISTE" << std::endl;
+        }
+        catch (pexcp::InvalidInfix &e) {
+            std::cerr << "ERRO: " + e.get_exp() + " NAO VALIDA" << std::endl;
+        }
+        catch (pexcp::InvalidPostfix &e) {
+            std::cerr << "ERRO: " + e.get_exp() + " NAO VALIDA" << std::endl;
+        }
+        catch (pexcp::InvalidExpresion &e) {
+            std::cerr << "ERRO: " + e.get_exp() + " NAO VALIDA" << std::endl;
         }
         catch(const std::exception &e) {
-            std::cerr << e.what() << '\n';
+            std::cerr << e.what() << std::endl;
         }
     }
     return 0;
