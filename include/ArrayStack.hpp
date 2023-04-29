@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IStack.hpp"
+#include "StackExcp.hpp"
 
 #define MAX_TAM 1000
 
@@ -27,7 +28,7 @@ public:
 
     void push(T item) override  {
         if (get_size() == MAX_TAM)
-            throw "Stack is full!";
+            throw sexcp::StackFull(get_size());
 
         itens[size] = item;
         size++;
@@ -35,7 +36,7 @@ public:
 
     T pop() override {
         if (get_size() == 0)
-            throw "Stack is empty!";
+            throw sexcp::EmptyStack(get_size());
 
         size--;
         return itens[size];
@@ -43,7 +44,7 @@ public:
 
     T top() override {
         if (get_size() == 0)
-            throw "Stack is empty!";
+            throw sexcp::EmptyStack(get_size());
         
         return itens[size - 1];
     }

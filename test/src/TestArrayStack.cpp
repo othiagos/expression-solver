@@ -40,3 +40,24 @@ TEST_CASE("Check top") {
     bool exp = stack.top() == 25 && stack.get_size() == 2;
     CHECK(exp);
 }
+
+TEST_CASE("Check stack is full") {
+    ArrayStack<int> stack;
+
+    while (stack.get_size() < MAX_TAM)    
+        stack.push(7);
+
+    CHECK_THROWS_AS(stack.push(21), sexcp::StackFull);
+}
+
+TEST_CASE("Check stack is empty") {
+    ArrayStack<int> stack;
+
+    CHECK_THROWS_AS(stack.pop(), sexcp::EmptyStack);
+}
+
+TEST_CASE("Check stack is empty TOP") {
+    ArrayStack<int> stack;
+
+    CHECK_THROWS_AS(stack.top(), sexcp::EmptyStack);
+}
