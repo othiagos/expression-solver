@@ -40,8 +40,7 @@ int main(int argc, char const *argv[]) {
             }
             else if (input == "RESOLVE") {
                 std::stringstream stream;
-                // stream << std::fixed << std::setprecision(10) << tree.solve();
-                stream << tree.solve();
+                stream << std::fixed << tree.solve();
 
                 std::string str = stream.str();
                 util::replace_char(str, ".", ",");
