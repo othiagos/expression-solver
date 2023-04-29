@@ -232,6 +232,7 @@ void ExpressionTree::insert_infix(std::string exp) {
 
 void ExpressionTree::insert_postfix(std::string exp) {
     clear();
+    rm_border_space(exp);
     Parser::is_postfix(exp);
     ArrayStack<Node*> stack;
 
