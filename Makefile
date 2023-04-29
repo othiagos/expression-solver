@@ -19,8 +19,8 @@ OBJS = \
 
 TEST_OBJS = \
 	$(OBJ_DIR)/TestArrayStack.o \
-	$(OBJ_DIR)/TestArrayQueue.o \
-	$(OBJ_DIR)/TestParser.o 
+	$(OBJ_DIR)/TestParser.o \
+	$(OBJ_DIR)/TestExpressionTree.o 
 
 all: mkdir $(EXE)
 
