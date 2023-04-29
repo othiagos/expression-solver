@@ -13,7 +13,14 @@ void Parser::is_valid(std::string exp) {
             continue;
         }
 
+        int float_sep = 0;
         for (int j = 0; util::is_number(exp[i + j]); j++) {
+            if (exp[i + j] == ',')
+                float_sep++;
+
+            if (float_sep >= MAX_SEP)
+                throw pexcp::InvalidExpresion(exp);
+            
             if (!util::is_number(exp[i + j + 1])) {
                 n_quant++;
                 i += j;

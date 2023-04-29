@@ -31,7 +31,7 @@ namespace pexcp {
         }
     };
 
-    class InvalidExpresion: public std::exception {
+    class InvalidExpresion : public std::exception {
     private:
         std::string _exp;
         

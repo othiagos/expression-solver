@@ -9,6 +9,7 @@
 #include "Util.hpp"
 
 #define MIN_NUMBER 2
+#define MAX_SEP 2
 
 class Parser {
 private:
