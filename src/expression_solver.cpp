@@ -44,6 +44,14 @@ int main(int argc, char const *argv[]) {
 
                 std::string str = stream.str();
                 util::replace_char(str, ".", ",");
+
+                //remove right zero from str
+                while (*(str.end() - 1) == '0')
+                    str.erase(str.end() - 1);
+                
+                if (*(str.end() - 1) == ',')
+                    str.erase(str.end() - 1);
+                
                 std::cout << "VAL: " << str << std::endl;
             }
             else if (input == "SAIR")
