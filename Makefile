@@ -6,7 +6,7 @@ INC_DIR = ./include
 LIB_DIR = ./lib
 BIN_DIR = ./bin
 OBJ_DIR = ./obj
-CFLAGS = -Wall -g
+CFLAGS = --std=c++11 -Wall -g
 TEST_DIR = ./test
 TEST_SRC_DIR = $(TEST_DIR)/src
 EXE = $(BIN_DIR)/$(NAME)
@@ -32,7 +32,7 @@ mkdir:
 	mkdir -p $(OBJ_DIR)
 
 $(EXE): $(OBJ_DIR)/$(NAME).o $(OBJS) 
-	$(CC) $< $(OBJS) -o $@
+	$(CC) $(CFLAGS) $< $(OBJS) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.hpp
 	$(CC) -c $(CFLAGS) $< -I $(INC_DIR) -o $@

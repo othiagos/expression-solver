@@ -43,7 +43,6 @@ int main(int argc, char const *argv[]) {
                 stream << std::fixed << tree.solve();
 
                 std::string str = stream.str();
-                util::replace_char(str, ".", ",");
 
                 //remove right zero from str
                 while (*(str.end() - 1) == '0')
