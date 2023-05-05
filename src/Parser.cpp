@@ -15,7 +15,7 @@ void Parser::is_valid(std::string exp) {
 
         int float_sep = 0;
         for (int j = 0; util::is_number(exp[i + j]); j++) {
-            if (exp[i + j] == ',')
+            if (exp[i + j] == ',' || exp[i + j] == '.')
                 float_sep++;
 
             if (float_sep >= MAX_SEP)

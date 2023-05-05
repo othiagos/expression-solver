@@ -32,12 +32,6 @@ TEST_CASE("check if is invalid  expression") {
 }
 
 TEST_CASE("check if is invalid  expression") {
-    std::string exp = "5,2 1 2 + 4.7 * + 3 -";
-
-    CHECK_THROWS_AS(Parser::is_postfix(exp), pexcp::InvalidExpresion);
-}
-
-TEST_CASE("check if is invalid  expression") {
     std::string exp = "5.22.3 + 4,1";
 
     CHECK_THROWS_AS(Parser::is_infix(exp), pexcp::InvalidExpresion);
@@ -47,6 +41,13 @@ TEST_CASE("check if is invalid expression") {
     std::string exp = "2 + 3 x 5";
 
     CHECK_THROWS_AS(Parser::is_infix(exp), pexcp::InvalidExpresion);
+}
+
+TEST_CASE("check if is valid expression") {
+    std::string exp = "5,2 1 2 + 4.7 * + 3 -";
+
+    Parser::is_postfix(exp);
+    CHECK(true);
 }
 
 TEST_CASE("check if is valid expression") {

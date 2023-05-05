@@ -19,7 +19,7 @@ bool util::is_operator(char alpha) {
 }
 
 bool util::is_number(char alpha) {
-    return (alpha >= '0' && alpha <= '9') || alpha == '.';
+    return (alpha >= '0' && alpha <= '9') || alpha == '.' || alpha == ',';
 }
 
 void util::replace_char(std::string &str, std::string ex, std::string by) {
