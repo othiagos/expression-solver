@@ -3,11 +3,11 @@ TEST_NAME = expression_solver_test
 CC = g++
 SRC_DIR = ./src
 INC_DIR = ./include
-LIB_DIR = ./lib
+LIB_DIR = $(INC_DIR)/lib
 BIN_DIR = ./bin
 OBJ_DIR = ./obj
 CFLAGS = --std=c++11 -Wall -g
-TEST_DIR = ./src/test
+TEST_DIR = $(SRC_DIR)/test
 EXE = $(BIN_DIR)/$(NAME)
 EXE_TEST = $(BIN_DIR)/$(TEST_NAME)
 
