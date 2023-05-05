@@ -7,8 +7,7 @@ LIB_DIR = ./lib
 BIN_DIR = ./bin
 OBJ_DIR = ./obj
 CFLAGS = --std=c++11 -Wall -g
-TEST_DIR = ./test
-TEST_SRC_DIR = $(TEST_DIR)/src
+TEST_DIR = ./src/test
 EXE = $(BIN_DIR)/$(NAME)
 EXE_TEST = $(BIN_DIR)/$(TEST_NAME)
 
@@ -48,7 +47,7 @@ run_test: test
 $(EXE_TEST): $(OBJ_DIR)/$(TEST_NAME).o $(OBJS) $(TEST_OBJS)
 	$(CC) $(CFLAGS) $< $(OBJS) $(TEST_OBJS) -o $(EXE_TEST)
 
-$(OBJ_DIR)/%.o: $(TEST_SRC_DIR)/%.cpp
+$(OBJ_DIR)/%.o: $(TEST_DIR)/%.cpp
 	$(CC) -c $(CFLAGS) $< -I $(INC_DIR) -I $(LIB_DIR) -o $@
 
 $(OBJ_DIR)/%.o: $(TEST_DIR)/%.cpp
