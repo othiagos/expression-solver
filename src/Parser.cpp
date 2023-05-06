@@ -13,6 +13,7 @@ void Parser::is_valid(std::string exp) {
             continue;
         }
 
+        //percorre um numero ate que o caractere nao seja um numero
         int float_sep = 0;
         for (int j = 0; util::is_number(exp[i + j]); j++) {
             if (exp[i + j] == ',' || exp[i + j] == '.')
@@ -22,6 +23,9 @@ void Parser::is_valid(std::string exp) {
                 throw pexcp::InvalidExpresion(exp);
             
             if (!util::is_number(exp[i + j + 1])) {
+                if (float_sep > 0 && j == 0)
+                    throw pexcp::InvalidExpresion(exp);
+
                 n_quant++;
                 i += j;
                 break;
@@ -31,7 +35,6 @@ void Parser::is_valid(std::string exp) {
         char c = exp[i];
         if(!(util::is_empty_space(c) || util::is_bracket(c) || util::is_operator(c) || util::is_number(c)))
             throw pexcp::InvalidExpresion(exp);
-
     }
 
     if (n_quant != o_quant + 1)

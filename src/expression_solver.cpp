@@ -48,7 +48,7 @@ int main(int argc, char const *argv[]) {
                 while (*(str.end() - 1) == '0')
                     str.erase(str.end() - 1);
                 
-                if (*(str.end() - 1) == ',')
+                if (*(str.end() - 1) == '.')
                     str.erase(str.end() - 1);
                 
                 std::cout << "VAL: " << str << std::endl;
